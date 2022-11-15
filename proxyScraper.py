@@ -137,37 +137,45 @@ async def scrape(method, output, verbose):
     await client.aclose()
 
     verbose_print(verbose, f"Writing {len(proxies)} proxies to file...")
-    with open(output, "w") as f:
+    with open(output, "a") as f:
         f.write("\n".join(proxies))
     verbose_print(verbose, "Done!")
     verbose_print(verbose, f"Took {time.time() - now} seconds")
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-p",
-        "--proxy",
-        help="Supported proxy type: " + ", ".join(sorted(set([s.method for s in scrapers]))),
-        required=True,
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        help="Output file name to save .txt file",
-        default="output.txt",
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        help="Increase output verbosity",
-        action="store_true",
-    )
-    args = parser.parse_args()
-
+def start(proxy='HTTP', output='output.txt', verbose=False):
     if sys.version_info >= (3, 7):
-        asyncio.run(scrape(args.proxy, args.output, args.verbose))
+        asyncio.run(scrape(proxy, output, verbose))
     else:
         loop = asyncio.get_event_loop()
         loop.run_until_complete(scrape(args.proxy, args.output, args.verbose))
         loop.close()
+    
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument(
+#         "-p",
+#         "--proxy",
+#         help="Supported proxy type: " + ", ".join(sorted(set([s.method for s in scrapers]))),
+#         required=True,
+#     )
+#     parser.add_argument(
+#         "-o",
+#         "--output",
+#         help="Output file name to save .txt file",
+#         default="output.txt",
+#     )
+#     parser.add_argument(
+#         "-v",
+#         "--verbose",
+#         help="Increase output verbosity",
+#         action="store_true",
+#     )
+#     args = parser.parse_args()
+
+#     if sys.version_info >= (3, 7):
+#         asyncio.run(scrape(args.proxy, args.output, args.verbose))
+#     else:
+#         loop = asyncio.get_event_loop()
+#         loop.run_until_complete(scrape(args.proxy, args.output, args.verbose))
+#         loop.close()

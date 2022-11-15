@@ -6,7 +6,7 @@ import urllib.request
 from time import time
 
 user_agents = []
-with open("user_agents.txt", "r") as f:
+with open("ProxyScraper/user_agents.txt", "r") as f:
     for line in f:
         user_agents.append(line.replace("\n", ""))
 
@@ -87,35 +87,39 @@ def check(file, timeout, method, site, verbose, random_user_agent):
     print(f"Found {len(valid_proxies)} valid proxies")
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-t",
-        "--timeout",
-        type=int,
-        help="Dismiss the proxy after -t seconds",
-        default=20,
-    )
-    parser.add_argument("-p", "--proxy", help="Check HTTPS or HTTP proxies", default="http")
-    parser.add_argument("-l", "--list", help="Path to your proxy list file", default="output.txt")
-    parser.add_argument(
-        "-s",
-        "--site",
-        help="Check with specific website like google.com",
-        default="https://google.com/",
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        help="Increase output verbosity",
-        action="store_true",
-    )
-    parser.add_argument(
-        "-r",
-        "--random_agent",
-        help="Use a random user agent per proxy",
-        action="store_true",
-    )
-    args = parser.parse_args()
-    check(file=args.list, timeout=args.timeout, method=args.proxy, site=args.site, verbose=args.verbose,
-          random_user_agent=args.random_agent)
+def start(list, timeout, proxy, site, verbose=False, random_agent=True):
+    check(file=list, timeout=timeout, method=proxy, site=site, verbose=verbose,
+            random_user_agent=random_agent)
+
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument(
+#         "-t",
+#         "--timeout",
+#         type=int,
+#         help="Dismiss the proxy after -t seconds",
+#         default=20,
+#     )
+#     parser.add_argument("-p", "--proxy", help="Check HTTPS or HTTP proxies", default="http")
+#     parser.add_argument("-l", "--list", help="Path to your proxy list file", default="output.txt")
+#     parser.add_argument(
+#         "-s",
+#         "--site",
+#         help="Check with specific website like google.com",
+#         default="https://google.com/",
+#     )
+#     parser.add_argument(
+#         "-v",
+#         "--verbose",
+#         help="Increase output verbosity",
+#         action="store_true",
+#     )
+#     parser.add_argument(
+#         "-r",
+#         "--random_agent",
+#         help="Use a random user agent per proxy",
+#         action="store_true",
+#     )
+#     args = parser.parse_args()
+#     check(file=args.list, timeout=args.timeout, method=args.proxy, site=args.site, verbose=args.verbose,
+#           random_user_agent=args.random_agent)
