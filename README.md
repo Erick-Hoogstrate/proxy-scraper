@@ -52,8 +52,15 @@ python3 proxyChecker.py -t 20 -s google.com -l output.txt
 * Dead proxies will be removed and just alive proxies will stay.
 * This script is also able to scrape Socks, but proxyChecker only check HTTP(S) proxies.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=iw4p/proxy-scraper&type=Date)](https://star-history.com/#iw4p/proxy-scraper&Date)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+### Issues
+Feel free to submit issues and enhancement requests or contact me via [vida.page/nima](https://vida.page/nima).
 
 ## Credit
 * [Proxy Scraper](https://github.com/Abigdog4/ProxyScrapper)
