@@ -75,6 +75,7 @@ class GeneralTableScraper(Scraper):
 
     async def handle(self, response):
         soup = BeautifulSoup(response.text, "html.parser")
+        print(soup.prettify())
         proxies = set()
         table = soup.find("table", attrs={"class": "table table-striped table-bordered"})
         for row in table.findAll("tr"):
@@ -91,19 +92,23 @@ class GeneralTableScraper(Scraper):
 
 
 scrapers = [
-    SpysMeScraper("http"),
-    SpysMeScraper("socks"),
-    ProxyScrapeScraper("http"),
-    ProxyScrapeScraper("socks4"),
-    ProxyScrapeScraper("socks5"),
-    ProxyListDownloadScraper("https", "elite"),
-    ProxyListDownloadScraper("http", "elite"),
-    ProxyListDownloadScraper("http", "transparent"),
-    ProxyListDownloadScraper("http", "anonymous"),
-    GeneralTableScraper("https", "http://sslproxies.org"),
-    GeneralTableScraper("http", "http://free-proxy-list.net"),
-    GeneralTableScraper("http", "http://us-proxy.org"),
-    GeneralTableScraper("socks", "http://socks-proxy.net"),
+    # SpysMeScraper("http"),
+    # SpysMeScraper("socks"),
+    # ProxyScrapeScraper("http"),
+    # ProxyScrapeScraper("socks4"),
+    # ProxyScrapeScraper("socks5"),
+    # ProxyListDownloadScraper("https", "elite"),
+    # ProxyListDownloadScraper("http", "elite"),
+    # ProxyListDownloadScraper("http", "transparent"),
+    # ProxyListDownloadScraper("http", "anonymous"),
+    # GeneralTableScraper("https", "http://sslproxies.org"),
+    # GeneralTableScraper("http", "http://free-proxy-list.net"),
+    # GeneralTableScraper("http", "http://us-proxy.org"),
+    # GeneralTableScraper("socks", "http://socks-proxy.net"),
+    GeneralTableScraper("socks5", "http://free-proxy.cz/en/proxylist/country/all/socks5/ping/level1"),
+    GeneralTableScraper("socks4", "http://free-proxy.cz/en/proxylist/country/all/socks4/ping/level1"),
+    GeneralTableScraper("https", "http://free-proxy.cz/en/proxylist/country/all/https/ping/level1"),
+    GeneralTableScraper("http", "http://free-proxy.cz/en/proxylist/country/all/http/ping/level1"),
 ]
 
 
